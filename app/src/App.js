@@ -2,24 +2,22 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
-    );
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+function AppContent(){
+  let asdf=3;
+  let date = "11/14/23";
+  let location = "badly 110";
+  return(
+    <>
+      <Component1 title="placeholder title" description={asdf} date={date} location={location}/>
+    </>
+  );
 }
 
 export default App;
