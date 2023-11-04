@@ -1,20 +1,16 @@
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import Component1 from './components/component1';
+import AddPoster from './components/AddPoster.jsx';
+import HomePage from './components/AddPoster.jsx';
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <AppContent />
+      <Routes>
+        <Route path='/' element ={<HomePage />} />
+        <Route path='/addposter' element ={<AddPoster />} />
+      </Routes>
     </Router>
-  );
-}
-
-function AppContent(){
-  return(
-    <>
-      <Component1 />
-    </>
   );
 }
 
