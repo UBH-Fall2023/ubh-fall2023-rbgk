@@ -1,18 +1,17 @@
-import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
-import Component1 from './components/component1';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import AddPoster from './components/AddPoster.jsx';
+import HomePage from './components/AddPoster.jsx';
 import './App.css';
-import Signin from "./components/auth/components/signin";
 
 function App() {
-    return (
-        <Router>
-            <AppContent/>
-        </Router>
-    );
-}
-
-function AppContent() {
-    return <Signin/>
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element ={<HomePage />} />
+        <Route path='/addposter' element ={<AddPoster />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
