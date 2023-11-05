@@ -45,31 +45,24 @@ function PosterForm()
 
     return (
         <form className="addPosterForm" onSubmit={handleSubmit}>
-            <label>Add Poster</label>
+            <h1>Create Your Poster!</h1>
             <div>
                 <label>Title:</label>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Title"
+                    placeholder="Event Name"
                 />
             </div>
             <div className="form-field">
                 <label>Genre:</label>
                 <select name="genre" value={genre} onChange={(e) => setGenre(e.target.genre)}>
-                    <option value="" disabled hidden>--- Select From Below ---</option>
+                    <option value="" disabled hidden>— Select Below —</option>
                     {genreData.map((item, _) => (
                         <option value={item}>{item}</option>
                     ))}
                 </select>
-            </div>
-            <div>
-                <label>Image:</label>
-                <input
-                    type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
-                />
             </div>
             <div>
                 <label>Location:</label>
@@ -77,7 +70,14 @@ function PosterForm()
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Location"
+                    placeholder="Building and Room #"
+                />
+            </div>
+            <div>
+                <label>Image:</label>
+                <input
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
                 />
             </div>
             <div>
@@ -99,11 +99,12 @@ function PosterForm()
                 />
             </div>
             <div>
-                <label>Description:</label>
+                <label>Event Description:</label>
+                <br />
                 <textarea
                     value={context}
                     onChange={(e) => setContext(e.target.value)}
-                    placeholder="Context"
+                    placeholder="Tell us more"
                 />
             </div>
             <button type="submit">Create Poster</button>
