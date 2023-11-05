@@ -114,7 +114,9 @@ h1{
     background-color: white;
     /* Adjust the z-index value as needed */
 }
-
+.popup h1{
+    color: black;
+}
 .popup .left-content {
     width: 50%;
     /* Adjust the width as needed */
@@ -139,6 +141,7 @@ h1{
     font-weight: 200;
     font-size: calc(15px + 0.3vw);
     overflow-y: auto;
+    color:black
 }
 
 .popup .right-content h1 {
