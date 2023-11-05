@@ -181,7 +181,7 @@ function BulletinBoard()
     }
     return (<>
 
-        <h1>UB Bulletin Board</h1>
+        <h1>The Central Bull</h1>
         {isSignedIn ? <button onClick={appSignOut}>Sign Out</button> : null}
         {isSignedIn ? (<div>
             <button className='addbutton' onClick={redirectToPostPage}>
