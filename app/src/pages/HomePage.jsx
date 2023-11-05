@@ -3,6 +3,9 @@ import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
+import PinImage from '../img/pushpin.svg';
+import { MdOutlineAddBox } from 'react-icons/md';
+
 
 
 function BulletinBoard()
@@ -12,7 +15,7 @@ function BulletinBoard()
     const navigate = useNavigate();
     const redirectToPostPage = () =>
     {
-        navigate('/addpost'); // Use the path to your add post page
+        navigate('/addposter');
     };
 
     useEffect(() =>
@@ -43,22 +46,30 @@ function BulletinBoard()
 
     return (
         <>
-            <div>
-                <h1>Welcome to the Bulletin Board</h1>
-                <button onClick={redirectToPostPage}>Add New Post</button>
-            </div>
-            <div className="bulletin-board">
-                {posters.map((poster) => (
-                    <div key={poster.id} className="poster">
-                        <img src={poster.image} alt={poster.title} />
-                        <h2>{poster.title}</h2>
-                        <p>Genre: {poster.genre}</p>
-                        <p>Location: {poster.location}</p>
-                        <p>Start Date: {poster.startDate}</p>
-                        <p>End Date: {poster.endDate}</p>
-                        <p>Description: {poster.context}</p>
-                    </div>
-                ))}
+            <div className='board'>
+                <div>
+                    <button className='addbutton' onClick={redirectToPostPage}>
+                        <MdOutlineAddBox size={40} color='white' />
+                    </button>
+                </div>
+                <div className="bulletin-board">
+
+                    {posters.map((poster) => (
+                        <div key={poster.id} className='grid'>
+                            <img src={PinImage} className="pin" alt="Pin" />
+                            <div className="poster">
+                                <img src={poster.image} alt={poster.title} />
+                                <h2>{poster.title}</h2>
+
+                                {/* <p>Genre: {poster.genre}</p>
+                            <p>Location: {poster.location}</p>
+                            <p>Start Date: {poster.startDate}</p>
+                            <p>End Date: {poster.endDate}</p>
+                            <p>Description: {poster.context}</p> */}
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );

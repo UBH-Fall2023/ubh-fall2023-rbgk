@@ -4,33 +4,76 @@
     gap: 20px;
     padding: 20px;
     justify-content: center;
-  }
-  
-  .poster {
-    border: 1px solid #ddd;
-    padding: 10px;
-    max-width: 300px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;   
-    margin-bottom: 20px;
+}
+
+.poster {
+    position: relative;
+    /* Needed for absolute positioning of the pin */
     background-color: white;
-  }
-  
-  .poster img {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    height: 250px;
+    width: 250px;
+    text-align: center;
+    align-items: center;
+}
+
+.grid {
+    position: relative;
+}
+
+.grid .pin {
+    position: absolute;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    width: 50px;
+    z-index: 2;
+}
+
+
+.poster:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Make sure the pin moves with the poster on hover */
+
+
+.poster img {
+    display: block;
     width: 100%;
-    height: auto;
-  }
-  
-  .poster:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .poster h2 {
+    height: 200px;
+    object-fit: cover;
+}
+
+.poster h2 {
     font-size: 20px;
     color: black;
-  }
-  
-  .poster p {
+}
+
+.poster p {
     color: black;
-  }
-  
+}
+
+.board{
+    margin-top:140px;
+    background-color: rgb(236, 151, 61);
+    border:solid;
+    border-color: rgb(124, 64, 0);
+    border-width: 2rem;
+}
+.addbutton {
+    position: absolute;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    margin: 1rem;
+    font: inherit;
+    cursor:pointer;
+    outline: inherit;
+}
