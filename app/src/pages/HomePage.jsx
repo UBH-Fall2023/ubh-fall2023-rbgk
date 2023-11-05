@@ -4,6 +4,7 @@ import './HomePage.css';
 import {useNavigate} from 'react-router-dom';
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
 import {collection, query, where, onSnapshot} from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 
 function BulletinBoard() {
     const [posters, setPosters] = useState([]);
@@ -52,14 +53,15 @@ function BulletinBoard() {
             const dataList = [];
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                dataList.push( data)
+                data.docid = doc.id;
+                dataList.push(data)
             });
             setPosters(dataList);
-            // console.log('whoa');
-            // console.log(posters);
-            // posters.map((poster) => {
-            //     console.log(poster.title);
-            // })
+            console.log('whoa');
+            console.log(dataList);
+            posters.map((poster) => {
+                console.log(poster);
+            })
         });
 
         return () => {
@@ -68,6 +70,14 @@ function BulletinBoard() {
         };
     }, []);
 
+
+    function deletePost(docId) {
+        deleteDoc(doc(db, "users", docId)).then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
 
     return (<>
         <div>
@@ -80,7 +90,7 @@ function BulletinBoard() {
             </div>)}
         </div>
         <div className="bulletin-board">
-            {posters.map((poster) => (<div key={poster.id} className="poster">
+            {posters.map((poster) => (<div key={poster.uuid} className="poster">
                 <img src={poster.image} alt={poster.title}/>
                 <h2>{poster.title}</h2>
                 <p>Genre: {poster.genre}</p>
@@ -88,6 +98,7 @@ function BulletinBoard() {
                 <p>Start Date: {poster.startDate}</p>
                 <p>End Date: {poster.endDate}</p>
                 <p>Description: {poster.context}</p>
+                {(isSignedIn && poster.uuid === getAuth().currentUser?.uid) ? (<button onClick={() => deletePost(poster.uuid)}>Delete</button>) : (<></>)}
             </div>))}
         </div>
     </>);

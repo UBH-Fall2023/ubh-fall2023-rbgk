@@ -26,25 +26,6 @@ function PosterForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (userId === "") {
-            setError('Please sign in to post');
-            return;
-        }
-
-        // required data
-        if (!title || !genre || (!isOnline && !location) || !startDate) {
-            setError('Please enter at least a title, genre, location, and start date');
-            return;
-        }
-
-        // if recurring is set
-        if (recurring && !endDate) {
-            setError('Please enter an end date');
-            return;
-        } else {
-            setEndDate(null);
-        }
-
         // Create a poster object with the image URL
         const poster = {
             uuid: userId,
@@ -56,6 +37,34 @@ function PosterForm() {
             endDate: endDate,
             context: context,
         };
+
+        if (userId === "") {
+            setError('Please sign in to post');
+            return;
+        }
+
+        // required data
+        if (!title || !genre || (!isOnline && !location) || !startDate) {
+            setError('Please enter at least a title, genre, location, and start date');
+            return;
+        }
+
+        let curDate = new Date(startDate);
+        poster.startDate = curDate.toISOString();
+
+        // if recurring is set
+        if (recurring && !endDate) {
+            setError('Please enter an end date');
+            return;
+        } else {
+            console.log('no end date');
+            console.log(curDate);
+            let endDate = curDate;
+            endDate.setDate(endDate.getDate() + 1);
+            endDate.setHours(0, 0, 0, 0);
+            poster.endDate = endDate.toISOString();
+        }
+
 
         const uploadData = () => addDoc(collection(db, "users"), poster).then(r => {
             console.log('added to user')

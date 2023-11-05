@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dd0a32a-56ce-451f-8032-64604a34be83" name="Changes" comment="changed description">
+    <list default="true" id="7dd0a32a-56ce-451f-8032-64604a34be83" name="Changes" comment="fixed insert and display data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/pages/AddPoster.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/pages/AddPoster.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/pages/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/pages/HomePage.jsx" afterDir="false" />
@@ -66,7 +66,7 @@
       <workItem from="1699120390733" duration="3165000" />
       <workItem from="1699123620626" duration="5839000" />
       <workItem from="1699139605751" duration="1782000" />
-      <workItem from="1699143155641" duration="18884000" />
+      <workItem from="1699143155641" duration="20721000" />
     </task>
     <task id="LOCAL-00001" summary="added firebase">
       <option name="closed" value="true" />
@@ -132,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699164350614</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixed insert and display data">
+      <option name="closed" value="true" />
+      <created>1699169847142</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699169847142</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,7 +157,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="backend" />
                       </list>
                     </value>
                   </entry>
@@ -169,6 +177,7 @@
     <MESSAGE value="finished up create posters" />
     <MESSAGE value="added logout" />
     <MESSAGE value="changed description" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed description" />
+    <MESSAGE value="fixed insert and display data" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed insert and display data" />
   </component>
 </project>
