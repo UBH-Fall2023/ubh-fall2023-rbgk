@@ -10,33 +10,37 @@ function BulletinBoard()
     const [posters, setPosters] = useState([]);
 
     const navigate = useNavigate();
-    const redirectToPostPage = () => {
+    const redirectToPostPage = () =>
+    {
         navigate('/addpost'); // Use the path to your add post page
     };
 
-    useEffect(() => {
-        const fetchPosters = async () => {
-            try {
+    useEffect(() =>
+    {
+        const fetchPosters = async () =>
+        {
+            try
+            {
                 const postersCollection = collection(db, 'board');
                 const posterSnapshot = await getDocs(postersCollection);
-                console.log("Snapshot docs:", posterSnapshot.docs); // Log the snapshot docs to inspect the structure
-    
-                // Map the documents directly without trying to access a 'fields' property
-                const posterList = posterSnapshot.docs.map(doc => {
-                    const data = doc.data(); // This should already contain the properties you want
-                    return { id: doc.id, ...data }; // Spread the data directly into the new object
+                console.log("Snapshot docs:", posterSnapshot.docs);
+                const posterList = posterSnapshot.docs.map(doc =>
+                {
+                    const data = doc.data();
+                    return { id: doc.id, ...data };
                 });
-    
+
                 setPosters(posterList);
-                console.log("Poster list:", posterList); // Final structure logging
-            } catch (error) {
+                console.log("Poster list:", posterList);
+            } catch (error)
+            {
                 console.error("Error fetching posters:", error);
             }
         };
-    
+
         fetchPosters();
     }, []);
-    
+
     return (
         <>
             <div>
