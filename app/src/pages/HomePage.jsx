@@ -109,7 +109,7 @@ function BulletinBoard()
                     </button>
                     <button onClick={appSignOut}>Sign Out</button>
                 </div>) : (<div>
-                    <button onClick={redirectToSignIn}>
+                    <button className='addbutton' onClick={redirectToSignIn}>
                         <MdOutlineAddBox size={40} color='white' />
                     </button>
                 </div>)}
