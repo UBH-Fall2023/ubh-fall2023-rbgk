@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,41 @@ function BulletinBoard()
 {
     const [posters, setPosters] = useState([]);
     const [isSignedIn, setIsSignedIn] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
+    const [selectedPoster, setselectedPoster] = useState(null);
+
+    const popupRef = useRef();
+
+    useEffect(() =>
+    {
+        document.body.classList.remove('popup-open');
+
+        const handleClickOutside = (event) =>
+        {
+            const navbarElement = document.getElementById('navbar'); // Replace 'navbar' with the actual ID or class of your navbar element
+            const clickedOnNavbar = navbarElement && navbarElement.contains(event.target);
+
+            if (popupRef.current && !popupRef.current.contains(event.target) && !clickedOnNavbar)
+            {
+                setShowPopup(false);
+                document.body.classList.remove('popup-open');
+            }
+        };
+
+        const handleBeforeUnload = () =>
+        {
+            document.body.classList.remove('popup-open');
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        window.addEventListener('beforeunload', handleBeforeUnload); // Add beforeunload event listener
+        return () =>
+        {
+            document.removeEventListener('mousedown', handleClickOutside);
+            window.removeEventListener('beforeunload', handleBeforeUnload); // Remove beforeunload event listener
+        };
+    }, []);
+
 
     const auth = getAuth();
     useEffect(() =>
@@ -88,6 +123,25 @@ function BulletinBoard()
             unsubscribe();
         };
     }, []);
+    function convertDateString(dateString) {
+        let date = new Date(dateString);
+      
+        let month = date.getMonth() + 1; 
+        let day = date.getDate();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+      
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+      
+        let ampm = 'AM';
+        if (hours >= 12) {
+          ampm = 'PM';
+          hours = hours > 12 ? hours - 12 : hours; 
+        }
+        hours = hours === 0 ? 12 : hours;
+      
+        return `${month}/${day} ${hours}:${minutes}${ampm}`;
+      }
     function deletePost(docId)
     {
         deleteDoc(doc(db, "users", docId)).then(() =>
@@ -98,35 +152,64 @@ function BulletinBoard()
             console.error("Error removing document: ", error);
         });
     }
-
+    const handleClick = (poster) =>
+    {
+        setselectedPoster(poster);
+        setShowPopup(true);
+        document.body.classList.add('popup-open');
+    };
+    function Popup({ poster, onClose })
+    {
+        return (
+            <div ref={popupRef} className="popup">
+                <div className="left-content">
+                    <img src={poster.image} alt={poster.title} />
+                </div>
+                <div className="right-content">
+                    <h1>{poster.title}</h1>
+                    <br />
+                    <h2>Starts: {convertDateString(poster.startDate)}</h2>
+                    <h2>Ends: {convertDateString(poster.endDate)}</h2>
+                    <h2>Location: {poster.location}</h2>
+                    <br />
+                    <p>{poster.context}</p>
+                    {(isSignedIn && poster.uuid === getAuth().currentUser?.uid) ? (
+                        <button onClick={() => deletePost(poster.docid)}>Remove Post</button>) : (<></>)}
+                </div>
+            </div>
+        );
+    }
     return (<>
+
         <h1>UB Bulletin Board</h1>
+        {isSignedIn ? <button onClick={appSignOut}>Sign Out</button> : null}
+        {isSignedIn ? (<div>
+            <button className='addbutton' onClick={redirectToPostPage}>
+                <MdOutlineAddBox size={40} color='white' />
+            </button>
+        </div>) : (<div>
+            <button className='addbutton' onClick={redirectToSignIn}>
+                <MdOutlineAddBox size={40} color='white' />
+            </button>
+        </div>)}
         <div className='board'>
             <div>
-                {isSignedIn ? (<div>
-                    <button className='addbutton' onClick={redirectToPostPage}>
-                        <MdOutlineAddBox size={40} color='white' />
-                    </button>
-                    <button onClick={appSignOut}>Sign Out</button>
-                </div>) : (<div>
-                    <button className='addbutton' onClick={redirectToSignIn}>
-                        <MdOutlineAddBox size={40} color='white' />
-                    </button>
-                </div>)}
+
             </div>
             <div className="bulletin-board">
-                {posters.filter(value => {return curDate < new Date(value.endDate)}).map((poster) =>  (<div key={poster.docid} className="grid">
+                {posters.filter(value => { return curDate < new Date(value.endDate) }).map((poster) => (<div key={poster.docid} className="grid">
                     <img src={PinImage} className="pin" alt="Pin" />
-                    <div className='poster'>
+                    <div className='poster' onClick={() => handleClick(poster)}>
                         {poster.image !== null && (<img src={poster.image} alt={poster.title} />)}
                         <div class='textbox'>
                             <h2>{poster.title}</h2>
                             <div class="date-location">
-                                <span class="date">{new Date(poster.startDate).getMonth()+1}/{new Date(poster.startDate).getDate()}</span>
+                                <span class="date">{new Date(poster.startDate).getMonth() + 1}/{new Date(poster.startDate).getDate()}</span>
                                 <span class="location">{poster.location}</span>
                             </div>
                         </div>
                     </div>
+                    {showPopup && <Popup poster={selectedPoster} onClose={() => setShowPopup(false)} />}
                     {/* <p>Genre: {poster.genre}</p>
                 <p>Location: {poster.location}</p>
                 <p>Start Date: {new Date(poster.startDate).toDateString()}</p>

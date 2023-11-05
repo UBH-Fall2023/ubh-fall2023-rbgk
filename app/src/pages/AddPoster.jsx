@@ -53,27 +53,10 @@ function PosterForm() {
             return;
         }
 
-        // required data
-        if (!title || !genre || (!isOnline && !location) || !startDate) {
-            setError('Please enter at least a title, genre, location, and start date');
-            return;
-        }
-
-        let curDate = new Date(startDate);
-        poster.startDate = curDate.toISOString();
-
-        // if recurring is set
-        if (recurring && !endDate) {
-            setError('Please enter an end date');
-            return;
-        } else {
-            console.log('no end date');
-            console.log(curDate);
-            let endDate = curDate;
-            endDate.setDate(endDate.getDate() + 1);
-            endDate.setHours(0, 0, 0, 0);
-            poster.endDate = endDate.toISOString();
-        }
+        let curStartDate = new Date(startDate);
+        let curEndDate = new Date(endDate);
+        poster.endDate = curEndDate.toISOString();
+        poster.startDate = curStartDate.toISOString();
 
 
         const uploadData = () => addDoc(collection(db, "users"), poster).then(r => {
@@ -123,10 +106,6 @@ function PosterForm() {
 
     };
 
-    const clearError = () => {
-        setError(null);
-    };
-
     return (
         <form className="addPosterForm" onSubmit={handleSubmit}>
             <label>Add Poster</label>
@@ -137,6 +116,7 @@ function PosterForm() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
+                    required
                 />
             </div>
             <div>
@@ -150,7 +130,7 @@ function PosterForm() {
             </div>
             <div className="form-field">
                 <label>Genre:</label>
-                <select name="genre" value={genre} onChange={(e) => setGenre(e.target.value)}>
+                <select name="genre" value={genre} onChange={(e) => setGenre(e.target.value)} required>
                     <option value="" disabled hidden>--- Select From Below ---</option>
                     {genreData.map((item) => (
                         <option key={item} value={item}>{item}</option>
@@ -174,6 +154,7 @@ function PosterForm() {
                         onChange={(e) => setLocation(e.target.value)}
                         placeholder="Location"
                         disabled={isOnline}
+                        required
                     />
                     <label>
                         <input type="checkbox" checked={isOnline} onChange={() => setIsOnline(!isOnline)}/>
@@ -183,6 +164,7 @@ function PosterForm() {
             </div>
             <div>
                 <label>Description:</label>
+                <p></p>
                 <textarea
                     value={context}
                     onChange={(e) => setContext(e.target.value)}
@@ -192,40 +174,26 @@ function PosterForm() {
             <div>
                 <label>Start Date:</label>
                 <input
-                    type="date"
+                    type="datetime-local"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     placeholder="Date"
+                    required
                 />
             </div>
-            <div>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={recurring}
-                        onChange={() => setRecurring(!recurring)}
-                    />
-                    Is recurring?
-                </label>
-            </div>
-            {recurring && (<div>
+            
+           <div>
                 <div>
                     <label>End Date:</label>
                     <input
-                        type="date"
+                        type="datetime-local"
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                         placeholder="Date"
                     />
                 </div>
-            </div>)}
+            </div>
             <button type="submit">Create Poster</button>
-            {error && (
-                <div className="error-box">
-                    <p>Error: {error}</p>
-                    <button onClick={clearError}>Dismiss</button>
-                </div>
-            )}
         </form>
     );
 }

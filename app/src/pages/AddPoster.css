@@ -5,3 +5,7 @@
     text-align: center;
     color:white;
 }
+textarea{
+    height:10rem;
+    width: 20rem;
+}
