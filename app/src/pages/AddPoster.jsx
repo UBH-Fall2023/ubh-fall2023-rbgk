@@ -22,6 +22,8 @@ function PosterForm() {
     const [context, setContext] = useState('');
     const [isOnline, setIsOnline] = useState(false);
     const [recurring, setRecurring] = useState(false);
+    const [moreInfoUrl, setMoreInfoUrl] = useState('');
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,6 +38,7 @@ function PosterForm() {
             startDate: startDate,
             endDate: endDate,
             context: context,
+            url: moreInfoUrl,
         };
 
         if (userId === "") {
@@ -129,6 +132,15 @@ function PosterForm() {
                     placeholder="Title"
                 />
             </div>
+            <div>
+                <label>Url:</label>
+                <input
+                    type="text"
+                    value={moreInfoUrl}
+                    onChange={(e) => setMoreInfoUrl(e.target.value)}
+                    placeholder="Url"
+                />
+            </div>
             <div className="form-field">
                 <label>Genre:</label>
                 <select name="genre" value={genre} onChange={(e) => setGenre(e.target.value)}>
@@ -163,6 +175,14 @@ function PosterForm() {
                 </div>
             </div>
             <div>
+                <label>Description:</label>
+                <textarea
+                    value={context}
+                    onChange={(e) => setContext(e.target.value)}
+                    placeholder="Context"
+                />
+            </div>
+            <div>
                 <label>Start Date:</label>
                 <input
                     type="date"
@@ -189,14 +209,6 @@ function PosterForm() {
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                         placeholder="Date"
-                    />
-                </div>
-                <div>
-                    <label>Description:</label>
-                    <textarea
-                        value={context}
-                        onChange={(e) => setContext(e.target.value)}
-                        placeholder="Context"
                     />
                 </div>
             </div>)}

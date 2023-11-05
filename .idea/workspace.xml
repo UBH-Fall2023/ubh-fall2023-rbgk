@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dd0a32a-56ce-451f-8032-64604a34be83" name="Changes" comment="fixed date formatting">
-      <change beforePath="$PROJECT_DIR$/app/.firebase/hosting.YnVpbGQ.cache" beforeDir="false" afterPath="$PROJECT_DIR$/app/.firebase/hosting.YnVpbGQ.cache" afterDir="false" />
+    <list default="true" id="7dd0a32a-56ce-451f-8032-64604a34be83" name="Changes" comment="stuff">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/pages/AddPoster.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/pages/AddPoster.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/pages/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/pages/HomePage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,7 @@
       <workItem from="1699120390733" duration="3165000" />
       <workItem from="1699123620626" duration="5839000" />
       <workItem from="1699139605751" duration="1782000" />
-      <workItem from="1699143155641" duration="21941000" />
+      <workItem from="1699143155641" duration="22469000" />
     </task>
     <task id="LOCAL-00001" summary="added firebase">
       <option name="closed" value="true" />
@@ -154,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699172596817</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="stuff">
+      <option name="closed" value="true" />
+      <created>1699172948263</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1699172948263</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +204,7 @@
     <MESSAGE value="fixed insert and display data" />
     <MESSAGE value="fixed some stuff" />
     <MESSAGE value="fixed date formatting" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed date formatting" />
+    <MESSAGE value="stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="stuff" />
   </component>
 </project>

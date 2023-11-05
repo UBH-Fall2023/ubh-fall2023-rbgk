@@ -4,7 +4,7 @@ import './HomePage.css';
 import {useNavigate} from 'react-router-dom';
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
 import {collection, query, where, onSnapshot} from "firebase/firestore";
-import { doc, deleteDoc } from "firebase/firestore";
+import {doc, deleteDoc} from "firebase/firestore";
 
 function BulletinBoard() {
     const [posters, setPosters] = useState([]);
@@ -91,14 +91,16 @@ function BulletinBoard() {
         </div>
         <div className="bulletin-board">
             {posters.map((poster) => (<div key={poster.docid} className="poster">
-                <img src={poster.image} alt={poster.title}/>
+                {poster.image !== null && (<img src={poster.image} alt={poster.title}/>)}
                 <h2>{poster.title}</h2>
                 <p>Genre: {poster.genre}</p>
                 <p>Location: {poster.location}</p>
                 <p>Start Date: {new Date(poster.startDate).toDateString()}</p>
                 <p>End Date: {(new Date(poster.endDate).toDateString())}</p>
-                <p>Description: {poster.context}</p>
-                {(isSignedIn && poster.uuid === getAuth().currentUser?.uid) ? (<button onClick={() => deletePost(poster.docid)}>Delete</button>) : (<></>)}
+                {poster.url !== '' && (<p>Url: {poster.url}</p>)}
+                {poster.context !== '' && (<p>Description: {poster.context}</p>)}
+                {(isSignedIn && poster.uuid === getAuth().currentUser?.uid) ? (
+                    <button onClick={() => deletePost(poster.docid)}>Delete</button>) : (<></>)}
             </div>))}
         </div>
     </>);
