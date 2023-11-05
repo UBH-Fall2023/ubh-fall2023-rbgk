@@ -115,23 +115,23 @@ function PosterForm() {
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Title"
+                    placeholder="Event Name"
                     required
                 />
             </div>
             <div>
-                <label>Url:</label>
+                <label>Link:</label>
                 <input
                     type="text"
                     value={moreInfoUrl}
                     onChange={(e) => setMoreInfoUrl(e.target.value)}
-                    placeholder="Url"
+                    placeholder="Insert Link"
                 />
             </div>
             <div className="form-field">
                 <label>Genre:</label>
                 <select name="genre" value={genre} onChange={(e) => setGenre(e.target.value)} required>
-                    <option value="" disabled hidden>--- Select From Below ---</option>
+                    <option value="" disabled hidden>— Select Below —</option>
                     {genreData.map((item) => (
                         <option key={item} value={item}>{item}</option>
                     ))}
@@ -152,13 +152,13 @@ function PosterForm() {
                         type="text"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
-                        placeholder="Location"
+                        placeholder="Building and Room #"
                         disabled={isOnline}
                         required
                     />
                     <label>
                         <input type="checkbox" checked={isOnline} onChange={() => setIsOnline(!isOnline)}/>
-                        Is Online ?
+                        Is Online?
                     </label>
                 </div>
             </div>
@@ -168,7 +168,7 @@ function PosterForm() {
                 <textarea
                     value={context}
                     onChange={(e) => setContext(e.target.value)}
-                    placeholder="Context"
+                    placeholder="Talk more about the event!"
                 />
             </div>
             <div>
