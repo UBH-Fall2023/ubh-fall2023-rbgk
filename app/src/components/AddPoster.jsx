@@ -1,92 +1,110 @@
 import React, { useState } from 'react';
-import { collection } from 'firebase/firestore'
-
-function PosterForm({ onSubmit })
+import { useNavigate } from 'react-router-dom';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../firebase';
+import { genreData } from './genreData';
+import './AddPoster.css'
+function PosterForm()
 {
+    const navigate = useNavigate();
+
     const [title, setTitle] = useState('');
     const [genre, setGenre] = useState('');
     const [image, setImage] = useState(null);
     const [location, setLocation] = useState('');
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [context, setContext] = useState('');
 
     const handleSubmit = (event) =>
     {
         event.preventDefault();
+
+        const boardColl = collection(db, 'board')
+
         const poster = {
             title,
             genre,
             image,
             location,
-            date,
-            time,
+            startDate,
+            endDate,
             context,
         };
-        onSubmit(poster);
+        addDoc(boardColl, { poster })
+            .then(response =>
+            {
+                console.log(response.id)
+                navigate('/')
+            })
+            .catch(error =>
+            {
+                console.log(error.message)
+            })
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="addPosterForm" onSubmit={handleSubmit}>
+            <label>Add Poster</label>
             <div>
+                <label>Title:</label>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
                 />
-                {errors.title && <p className="error">{errors.title}</p>}
+            </div>
+            <div className="form-field">
+                <label>Genre:</label>
+                <select name="genre" value={genre} onChange={(e) => setGenre(e.target.genre)}>
+                    <option value="" disabled hidden>--- Select From Below ---</option>
+                    {genreData.map((item, _) => (
+                        <option value={item}>{item}</option>
+                    ))}
+                </select>
             </div>
             <div>
-                <input
-                    type="text"
-                    value={genre}
-                    onChange={(e) => setGenre(e.target.value)}
-                    placeholder="Genre"
-                />
-                {errors.genre && <p className="error">{errors.genre}</p>}
-            </div>
-            <div>
+                <label>Image:</label>
                 <input
                     type="file"
                     onChange={(e) => setImage(e.target.files[0])}
                 />
-                {errors.image && <p className="error">{errors.image}</p>}
             </div>
             <div>
+                <label>Location:</label>
                 <input
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Location"
                 />
-                {errors.location && <p className="error">{errors.location}</p>}
             </div>
             <div>
+                <label>Start Date:</label>
                 <input
                     type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
                     placeholder="Date"
                 />
-                {errors.date && <p className="error">{errors.date}</p>}
             </div>
             <div>
+                <label>End Date:</label>
                 <input
-                    type="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                    placeholder="Time"
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    placeholder="Date"
                 />
-                {errors.time && <p className="error">{errors.time}</p>}
             </div>
             <div>
+                <label>Description:</label>
                 <textarea
                     value={context}
                     onChange={(e) => setContext(e.target.value)}
                     placeholder="Context"
                 />
-                {errors.context && <p className="error">{errors.context}</p>}
             </div>
             <button type="submit">Create Poster</button>
         </form>
