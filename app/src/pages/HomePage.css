@@ -5,7 +5,12 @@
     padding: 20px;
     justify-content: center;
 }
-
+h1{
+    text-align: center;
+    color: white;
+    margin-top: 5rem;
+    padding: 0;
+}
 .poster {
     position: relative;
     /* Needed for absolute positioning of the pin */

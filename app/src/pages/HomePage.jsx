@@ -72,6 +72,7 @@ function BulletinBoard()
                 data.docid = doc.id;
                 dataList.push(data)
             });
+            dataList.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
             setPosters(dataList);
             console.log('whoa');
             console.log(dataList);
@@ -87,8 +88,6 @@ function BulletinBoard()
             unsubscribe();
         };
     }, []);
-
-
     function deletePost(docId)
     {
         deleteDoc(doc(db, "users", docId)).then(() =>
@@ -101,6 +100,7 @@ function BulletinBoard()
     }
 
     return (<>
+        <h1>UB Bulletin Board</h1>
         <div className='board'>
             <div>
                 {isSignedIn ? (<div>
@@ -115,14 +115,14 @@ function BulletinBoard()
                 </div>)}
             </div>
             <div className="bulletin-board">
-                {posters.map((poster) => (<div key={poster.docid} className="grid">
+                {posters.filter(value => {return curDate < new Date(value.endDate)}).map((poster) =>  (<div key={poster.docid} className="grid">
                     <img src={PinImage} className="pin" alt="Pin" />
                     <div className='poster'>
                         {poster.image !== null && (<img src={poster.image} alt={poster.title} />)}
                         <div class='textbox'>
                             <h2>{poster.title}</h2>
                             <div class="date-location">
-                                <span class="date">{new Date(poster.startDate).getMonth()}/{new Date(poster.startDate).getDate()}</span>
+                                <span class="date">{new Date(poster.startDate).getMonth()+1}/{new Date(poster.startDate).getDate()}</span>
                                 <span class="location">{poster.location}</span>
                             </div>
                         </div>
