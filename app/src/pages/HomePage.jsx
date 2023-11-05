@@ -12,7 +12,7 @@ function BulletinBoard()
     const navigate = useNavigate();
     const redirectToPostPage = () =>
     {
-        navigate('/addpost'); // Use the path to your add post page
+        navigate('/addposter'); // Use the path to your add post page
     };
 
     useEffect(() =>

@@ -11,12 +11,11 @@ const AuthDetails = () => {
         const listen = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setAuthUser(user);
-                console.log(user);
+                console.log(typeof user);
                 navigate('/')
             } else {
                 setAuthUser(null);
                 navigate('/signin')
-
             }
         });
 
