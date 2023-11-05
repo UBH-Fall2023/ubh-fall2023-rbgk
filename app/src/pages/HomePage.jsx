@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {auth, db} from '../firebase';
-import {collection, getDocs} from 'firebase/firestore';
 import './HomePage.css';
 import {useNavigate} from 'react-router-dom';
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-
+import {collection, query, where, onSnapshot} from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 
 function BulletinBoard() {
     const [posters, setPosters] = useState([]);
@@ -45,28 +45,39 @@ function BulletinBoard() {
         navigate('/addposter'); // Use the path to your add post page
     };
 
+    const curDate = new Date();
+    const q = query(collection(db, "users"));
+
     useEffect(() => {
-        const fetchPosters = async () => {
-            try {
-                const postersCollection = collection(db, 'board');
-                const posterSnapshot = await getDocs(postersCollection);
-                console.log("Snapshot docs:", posterSnapshot.docs);
-                const posterList = posterSnapshot.docs.map(doc => {
-                    const data = doc.data();
-                    return {id: doc.id, ...data};
-                });
-
-                setPosters(posterList);
-                console.log("Poster list:", posterList);
-            } catch (error) {
-                console.error("Error fetching posters:", error);
-            }
-        };
-
-        fetchPosters().then(r => {
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const dataList = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                data.docid = doc.id;
+                dataList.push(data)
+            });
+            setPosters(dataList);
+            console.log('whoa');
+            console.log(dataList);
+            posters.map((poster) => {
+                console.log(poster);
+            })
         });
+
+        return () => {
+            // Unsubscribe when the component unmounts
+            unsubscribe();
+        };
     }, []);
 
+
+    function deletePost(docId) {
+        deleteDoc(doc(db, "users", docId)).then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
 
     return (<>
         <div>
@@ -79,7 +90,7 @@ function BulletinBoard() {
             </div>)}
         </div>
         <div className="bulletin-board">
-            {posters.map((poster) => (<div key={poster.id} className="poster">
+            {posters.map((poster) => (<div key={poster.uuid} className="poster">
                 <img src={poster.image} alt={poster.title}/>
                 <h2>{poster.title}</h2>
                 <p>Genre: {poster.genre}</p>
@@ -87,6 +98,7 @@ function BulletinBoard() {
                 <p>Start Date: {poster.startDate}</p>
                 <p>End Date: {poster.endDate}</p>
                 <p>Description: {poster.context}</p>
+                {(isSignedIn && poster.uuid === getAuth().currentUser?.uid) ? (<button onClick={() => deletePost(poster.uuid)}>Delete</button>) : (<></>)}
             </div>))}
         </div>
     </>);
