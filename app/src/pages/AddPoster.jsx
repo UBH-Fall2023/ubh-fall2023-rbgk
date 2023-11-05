@@ -7,6 +7,7 @@ import './AddPoster.css'
 import {getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import {getAuth} from "firebase/auth";
 import {doc, setDoc} from "firebase/firestore";
+import defaultImg from "../img/default-placeholder.png";
 
 function PosterForm() {
     const userId = getAuth().currentUser.uid
@@ -29,11 +30,17 @@ function PosterForm() {
         event.preventDefault();
 
         // Create a poster object with the image URL
+        if (!image){
+            setImage(defaultImg)
+        }
+
+        const posterImage = image || defaultImg;
+
         const poster = {
             uuid: userId,
             title: title,
             genre: genre,
-            image: null,
+            image: posterImage,
             location: isOnline ? "Online" : location,
             startDate: startDate,
             endDate: endDate,
