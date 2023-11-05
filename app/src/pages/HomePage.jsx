@@ -90,15 +90,15 @@ function BulletinBoard() {
             </div>)}
         </div>
         <div className="bulletin-board">
-            {posters.map((poster) => (<div key={poster.uuid} className="poster">
+            {posters.map((poster) => (<div key={poster.docid} className="poster">
                 <img src={poster.image} alt={poster.title}/>
                 <h2>{poster.title}</h2>
                 <p>Genre: {poster.genre}</p>
                 <p>Location: {poster.location}</p>
-                <p>Start Date: {poster.startDate}</p>
-                <p>End Date: {poster.endDate}</p>
+                <p>Start Date: {new Date(poster.startDate).toDateString()}</p>
+                <p>End Date: {(new Date(poster.endDate).toDateString())}</p>
                 <p>Description: {poster.context}</p>
-                {(isSignedIn && poster.uuid === getAuth().currentUser?.uid) ? (<button onClick={() => deletePost(poster.uuid)}>Delete</button>) : (<></>)}
+                {(isSignedIn && poster.uuid === getAuth().currentUser?.uid) ? (<button onClick={() => deletePost(poster.docid)}>Delete</button>) : (<></>)}
             </div>))}
         </div>
     </>);
