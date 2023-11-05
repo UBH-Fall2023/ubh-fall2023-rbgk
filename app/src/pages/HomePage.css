@@ -1,0 +1,181 @@
+.bulletin-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+h1{
+    text-align: center;
+    color: white;
+    margin-top: 5rem;
+    padding: 0;
+}
+.poster {
+    position: relative;
+    /* Needed for absolute positioning of the pin */
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    height: 250px;
+    width: 250px;
+    text-align: center;
+    align-items: center;
+}
+
+.grid {
+    position: relative;
+}
+
+.grid .pin {
+    position: absolute;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    width: 50px;
+    z-index: 2;
+}
+
+
+.poster:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Make sure the pin moves with the poster on hover */
+
+
+.poster img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.board{
+    margin-top:140px;
+    background-color: rgb(236, 151, 61);
+    border:solid;
+    border-color: rgb(124, 64, 0);
+    border-width: 2rem;
+}
+.addbutton {
+    position: absolute;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    margin: 1rem;
+    font: inherit;
+    cursor:pointer;
+    outline: inherit;
+}
+
+.textbox {
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    padding-top:0.4em;
+}
+
+.date-location {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date, .location {
+    flex: 1;
+}
+.textbox h2 {
+    font-size: 1em; /* Adjust font size as needed */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Keeps the text in a single line */
+    text-overflow: ellipsis; /* Adds an ellipsis if the text is too long */
+    max-width: 100%; /* Ensures the title does not exceed the container width */
+}
+
+/* This is to ensure that the date and location are on the same line */
+.h2 + .date-location {
+    display: flex;
+}
+
+/* POPUP */
+
+.popup {
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vh;
+    height: 100vh;
+    max-height: 70%;
+    z-index: 3;
+    background-color: white;
+    /* Adjust the z-index value as needed */
+}
+
+.popup .left-content {
+    width: 50%;
+    /* Adjust the width as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.popup .left-content img {
+    backdrop-filter: none;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popup .right-content {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: var(--secondary);
+    opacity: 0.95;
+    flex: 1;
+    padding: 20px;
+    font-weight: 200;
+    font-size: calc(15px + 0.3vw);
+    color: var(--main);
+    overflow-y: auto;
+}
+
+.popup .right-content h1 {
+    font-weight: 400;
+    font-size: calc(30px + 0.3vw);
+    color: var(--main);
+
+}
+
+.popup .right-content h2 {
+    font-weight: 200;
+    font-size: calc(15px + 0.3vw);
+    color: var(--main);
+}
+
+.popup .right-content h3 {
+    font-weight: 200;
+    font-size: calc(15px + 0.3vw);
+    margin-bottom: 20px;
+    color: var(--main);
+}
+
+.link:hover {
+    color: white;
+    --_p: 100%;
+    transition: background-position .4s, background-size 0s;
+}
+
+.link:active {
+    box-shadow: 0 0 9e9q inset rgba(0, 0, 0, 0.6);
+    background-color: var(--main);
+}

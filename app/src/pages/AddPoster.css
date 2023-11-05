@@ -1,0 +1,29 @@
+.addPosterForm{
+    background-color: rgba(255, 255, 255, 0.179);
+    
+    margin: 5rem;
+    text-align: center;
+    color:white;
+}
+
+label{
+    margin-right: 10px;
+}
+
+textarea {
+    height:10rem;
+    width: 20rem;
+    resize: vertical;
+    border-radius: 5px;
+    border-width: 3px;
+}
+
+div {
+    margin: 10px
+}
+
+input {
+    border-radius: 5px;
+    border: 1px solid #4d79c7;
+    min-height: 25px;
+}
