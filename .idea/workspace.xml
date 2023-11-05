@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dd0a32a-56ce-451f-8032-64604a34be83" name="Changes" comment="added auto deploy for github">
-      <change afterPath="$PROJECT_DIR$/app/src/auth.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/components/auth/auth.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/components/auth/components/signup.jsx" afterDir="false" />
+    <list default="true" id="7dd0a32a-56ce-451f-8032-64604a34be83" name="Changes" comment="finished up create posters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/firebase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/pages/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/pages/HomePage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,20 +34,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\razer\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Dev\web\ubh-fall2023-rbgk\app\src\components\auth" />
@@ -68,6 +65,8 @@
       <updated>1699120388532</updated>
       <workItem from="1699120390733" duration="3165000" />
       <workItem from="1699123620626" duration="5839000" />
+      <workItem from="1699139605751" duration="1782000" />
+      <workItem from="1699143155641" duration="13994000" />
     </task>
     <task id="LOCAL-00001" summary="added firebase">
       <option name="closed" value="true" />
@@ -101,7 +100,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699129159401</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added authentication">
+      <option name="closed" value="true" />
+      <created>1699146023344</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699146023344</updated>
+    </task>
+    <task id="LOCAL-00006" summary="finished up create posters">
+      <option name="closed" value="true" />
+      <created>1699162220673</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699162220673</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,7 +133,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="backend" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -133,6 +148,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added firebase" />
     <MESSAGE value="added auto deploy for github" />
-    <option name="LAST_COMMIT_MESSAGE" value="added auto deploy for github" />
+    <MESSAGE value="git" />
+    <MESSAGE value="added authentication" />
+    <MESSAGE value="finished up create posters" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished up create posters" />
   </component>
 </project>
