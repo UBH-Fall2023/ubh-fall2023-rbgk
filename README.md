@@ -1,12 +1,26 @@
-# UB Hacking Fall 2023 Rules 
-- Teams can consist of between 1 and 4 people.
-- To have your submission be considered for judging, you must submit a 2-5 minute video along with your project. Try to keep it as concise as possible!
-- The projects submitted for judging cannot have been started prior to the start of the hackathon. In other words, teams can plan their projects in great detail, but they cannot begin writing code until they arrive at the hackathon.
-- Additionally, we are partnering with MLH this year, which means that our hackers must follow their code of conduct which can be found below.
-- Any and all resources used must be open source and specified in either the project, or the project description.
-- Your project must be publically available and under source control in this repository.
-- Prior to submitting to devpost, your project must be fully committed and pushed to this repository.
-- The link to this repository must be available on your devpost submission.
-- Projects can not have been submitted to another event, including other hackathons this weekend.
-- [Code of Conduct](https://drive.google.com/file/d/1RH_TtRu6EOHSbOoiSj2h1Q4jswtVILzE/view)
-- [MLH Code of Conduct](https://static.mlh.io/docs/mlh-code-of-conduct.pdf)
+## Inspiration
+Walking to and from classes, I always gave time to look at the bulletin boards and see what was happening.  
+A consistency I found was the way posters would be outdated by a week or more, and still be hanging up.  
+
+## What it does
+We designed The Central Bull to solve what bulletin boards cannot.  
+This includes auto-removing outdated content, sorting content by date of occurrence, and the ability to search for a title. 
+
+## How we built it
+Our tech stack consists of React and Firebase. We use CSS for styling. 
+
+## Challenges we ran into
+Time was our biggest constraint. Our group was only fully after the Opening Ceremonies, which meant we weren't able to fully discuss what the idea was beforehand.  
+An unexpected challenge was GitHub Classroom + Firebase. Even after the approval from UB Hacking organizers, we were not able to automatically deploy our changes which reduced our workflow productivity. 
+
+## Accomplishments that we're proud of
+As a team that was formed from the Opening Ceremonies, we performed extremely well, given the time constraints, environment, and skill limitations.  
+We were able to learn new things, learn how to not do certain things, and have a gained a greater understanding of how to successfully develop this product. 
+
+## What we learned
+We learned that our requirements for MVP were just out of our range.  
+The time constraint negatively affected our planning and led to poor choices.  
+While we would have liked being able to launch a fully complete and working webapp within this hackathon, we greatly value quality which we will solve before we launch. 
+
+## What's next for The Central Bull
+We're not planning on stopping after this hackathon. Our overall goal is to integrate this into the daily lives of UB Students. 
