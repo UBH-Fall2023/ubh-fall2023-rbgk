@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {auth, db} from '../firebase';
-import {collection, getDocs} from 'firebase/firestore';
 import './HomePage.css';
 import {useNavigate} from 'react-router-dom';
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-
+import {collection, query, where, onSnapshot} from "firebase/firestore";
 
 function BulletinBoard() {
     const [posters, setPosters] = useState([]);
@@ -45,26 +44,28 @@ function BulletinBoard() {
         navigate('/addposter'); // Use the path to your add post page
     };
 
+    const curDate = new Date();
+    const q = query(collection(db, "users"));
+
     useEffect(() => {
-        const fetchPosters = async () => {
-            try {
-                const postersCollection = collection(db, 'board');
-                const posterSnapshot = await getDocs(postersCollection);
-                console.log("Snapshot docs:", posterSnapshot.docs);
-                const posterList = posterSnapshot.docs.map(doc => {
-                    const data = doc.data();
-                    return {id: doc.id, ...data};
-                });
-
-                setPosters(posterList);
-                console.log("Poster list:", posterList);
-            } catch (error) {
-                console.error("Error fetching posters:", error);
-            }
-        };
-
-        fetchPosters().then(r => {
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const dataList = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                dataList.push( data)
+            });
+            setPosters(dataList);
+            // console.log('whoa');
+            // console.log(posters);
+            // posters.map((poster) => {
+            //     console.log(poster.title);
+            // })
         });
+
+        return () => {
+            // Unsubscribe when the component unmounts
+            unsubscribe();
+        };
     }, []);
 
 

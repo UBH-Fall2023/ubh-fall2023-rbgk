@@ -41,6 +41,8 @@ function PosterForm() {
         if (recurring && !endDate) {
             setError('Please enter an end date');
             return;
+        } else {
+            setEndDate(null);
         }
 
         // Create a poster object with the image URL
@@ -55,7 +57,7 @@ function PosterForm() {
             context: context,
         };
 
-        const uploadData = () => setDoc(doc(db, "users", userId), poster).then(r => {
+        const uploadData = () => addDoc(collection(db, "users"), poster).then(r => {
             console.log('added to user')
             navigate('/');
         }).catch(e => {
