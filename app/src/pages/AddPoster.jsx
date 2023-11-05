@@ -4,7 +4,10 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import { genreData } from './genreData';
 import './AddPoster.css'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
 function PosterForm()
+
 {
     const navigate = useNavigate();
 
@@ -16,32 +19,52 @@ function PosterForm()
     const [endDate, setEndDate] = useState('');
     const [context, setContext] = useState('');
 
-    const handleSubmit = (event) =>
-    {
+    const handleSubmit = (event) => {
         event.preventDefault();
-
-        const boardColl = collection(db, 'board')
-
-        const poster = {
-            title,
-            genre,
-            image,
-            location,
-            startDate,
-            endDate,
-            context,
-        };
-        addDoc(boardColl, { poster })
-            .then(response =>
-            {
-                console.log(response.id)
-                navigate('/')
-            })
-            .catch(error =>
-            {
-                console.log(error.message)
-            })
+    
+        if (!image) {
+            console.error('No image file selected');
+            return;
+        }
+    
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${image.name}`);
+    
+        // Upload the file
+        uploadBytes(storageRef, image).then((snapshot) => {
+            // console.log('Uploaded an image');
+    
+            // Get the download URL
+            getDownloadURL(snapshot.ref).then((downloadURL) => {
+                console.log('File available at', downloadURL);
+    
+                // Create a poster object with the image URL
+                const poster = {
+                    title,
+                    genre,
+                    image: downloadURL,
+                    location,
+                    startDate,
+                    endDate,
+                    context,
+                };
+    
+                // Add the poster to Firestore
+                const boardColl = collection(db, 'board');
+                addDoc(boardColl, poster)
+                    .then(response => {
+                        console.log(response.id);
+                        navigate('/');
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    });
+            });
+        }).catch((error) => {
+            console.error("Error uploading image: ", error);
+        });
     };
+    
 
     return (
         <form className="addPosterForm" onSubmit={handleSubmit}>
@@ -57,11 +80,12 @@ function PosterForm()
             </div>
             <div className="form-field">
                 <label>Genre:</label>
-                <select name="genre" value={genre} onChange={(e) => setGenre(e.target.genre)}>
+                <select name="genre" value={genre} onChange={(e) => setGenre(e.target.value)}>
                     <option value="" disabled hidden>--- Select From Below ---</option>
-                    {genreData.map((item, _) => (
-                        <option value={item}>{item}</option>
+                    {genreData.map((item) => (
+                        <option key={item} value={item}>{item}</option>
                     ))}
+
                 </select>
             </div>
             <div>

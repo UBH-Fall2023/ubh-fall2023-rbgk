@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import AddPoster from './components/AddPoster.jsx';
-import HomePage from './components/AddPoster.jsx';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AddPoster from './pages/AddPoster.jsx';
+import HomePage from './pages/HomePage.jsx';
 import './App.css';
 
 function App() {
